@@ -183,7 +183,11 @@ extension View {
     @ViewBuilder
     func myGesture(_ g:_EndedGesture<_ChangedGesture<DragGesture>>) -> some View {
         if #available(iOS 18, *) {
+            #if compiler(>=6.0)
             simultaneousGesture(g)
+            #else
+            gesture(g)
+            #endif
         } else {
             gesture(g)
         }
